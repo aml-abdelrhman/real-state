@@ -1,0 +1,184 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 0;
+  width: 100%;
+  max-width: 930px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: -80px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+}
+
+.logo-img {
+  width: 40px;
+  height: auto;
+}
+
+.logo-texts {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.slogan-one {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "DM Serif Display", sans-serif;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.slogan-two {
+  font-size: 11px;
+  opacity: 0.9;
+  font-family: "DM Serif Display", sans-serif;
+  white-space: nowrap;
+}
+
+.slogan-three {
+  font-size: 10px;
+  opacity: 0.85;
+  font-family: "Cairo", sans-serif;
+  direction: rtl;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 14px 22px;
+  background: rgba(193, 194, 194, 0.4);
+  backdrop-filter: blur(25px);
+  border-radius: 20px;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  margin-left: -90px;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: "Cairo", sans-serif;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+
+.nav-btn:hover {
+  transform: scale(1.05);
+  color: #dcdcdc;
+}
+
+.nav-arrow {
+  font-family: "Font Awesome 6 Pro";
+  font-size: 14px;
+  transform: rotate(30deg);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: rgba(193, 194, 194, 0.35);
+  backdrop-filter: blur(20px);
+  border: none;
+  border-radius: 10px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 20px;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 2px;
+}
+
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 30px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .button-container {
+    display: none;
+  }
+
+  .navbar {
+    padding: 10px 20px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 90px;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 90px;
+    justify-content: center;
+    flex: 2;
+    border-radius: 12px;
+    margin-right: 0;
+    padding: 4px 8px;
+
+    
+   
+  }
+
+  .logo {
+    padding: 8px 14px;
+    border-radius: 12px;
+    
+  }
+
+  .mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    margin-top: 14px;
+    padding: 18px;
+    background: rgba(194, 194, 193, 0.1);
+    backdrop-filter: blur(22px);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .mobile-menu .nav-btn {
+    font-size: 14px;
+    justify-content: flex-start;
+  }
+}

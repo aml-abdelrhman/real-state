@@ -1,0 +1,388 @@
+/* SECTION GRID */
+.map-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  height: 100vh;
+  gap: 6px;
+  padding-right: 25px;
+}
+
+/* LEFT */
+.map-wrapper {
+  position: relative;
+  width: 80%;
+  height: 600px;
+  border-radius: 30px;
+  overflow: hidden;
+  
+}
+
+/* BACKGROUND IMAGE */
+.map-bg {
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* BLUR LAYER */
+.map-blur {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.12);
+  z-index: 2;
+}
+
+/* ===== TOP CONTENT ===== */
+.map-top-content {
+  position: absolute;
+  top: 26px;
+  right: 48px;
+  max-width: 550px;
+  z-index: 3;
+  color: #fff;
+  padding: 15px;
+}
+
+
+
+
+.map-top-content::before {
+  content: "";
+  position: absolute;
+  bottom: 160px; 
+  left: -17px;   
+  width: 60px;
+  height: 60px;
+   background: #ffffff;
+  z-index: 100;
+  clip-path: path('M30,0 L60,60 Q30,40 0,60 Z'); /* رأس أعلى، قاعدة منحنية للداخل */
+  transform: rotate(335deg);
+}
+
+
+.map-top-content::after {
+  content: "";
+  position: absolute;
+  bottom: 240px; 
+  right: 255px;  
+  width: 50px;
+  height: 60px;
+  background: #ffffff;
+  z-index: 5;
+  clip-path: path('M30,0 L60,60 Q30,40 0,60 Z'); /* نفس الشكل */
+  transform: rotate(310deg) scaleX(1); /* قلب أفقي وتحريك الزاوية */
+}
+
+.map-title {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.map-text {
+  font-size: 20px;
+  line-height: 1.7;
+  margin-bottom: 18px;
+  opacity: 0.9;
+}
+
+.map-top-boxes {
+  display: flex;
+  gap: 12px;
+  max-width: 450px;
+  margin-right: -35px;
+}
+
+
+.small-box {
+  color: #ffffff;
+  width: 465px;
+  padding: 8px;
+  border-radius: 18px;
+  display:flex ;
+  gap:15px
+  
+
+}
+
+.icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  backdrop-filter: blur(17px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.71391px solid rgba(0, 0, 0, 0.2);
+}
+
+.icon-circle svg {
+  color: #ffffff;
+}
+
+
+.box-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 0;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.box-number-text {
+  font-size: 22px;
+  font-weight: 700;
+  color: inherit;
+  line-height: 1.2;
+}
+
+.box-desc-text {
+  font-size: 14px;
+  opacity: 0.8;
+  color: inherit;
+}
+
+
+/* ===== CARD ===== */
+.map-card {
+  position: absolute;
+  bottom: 40px;
+  right: -220px;
+  width: 710px;
+  z-index: 4;
+  margin-bottom: -30px;
+ 
+}
+
+/* IMAGES */
+.map-images {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  height: 200px;
+  margin-bottom: 30px;
+ 
+}
+
+.map-img-box {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  border-radius: 28px;
+  overflow: hidden;
+}
+
+.map-img-box img {
+  object-fit: cover;
+}
+
+/* BUTTON */
+.button {
+  width: 90%;
+  max-width: 450px;
+  padding: 5px ;
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 18px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 270px;
+  margin-bottom: 15px;
+  
+}
+
+/* WHITE CORNER */
+.map-corner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100px;
+  background: #fff;
+  border-radius: 30px;
+  z-index: 5;
+}
+
+
+/* RIGHT IMAGE */
+.side-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.side-image {
+  object-fit: cover;
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .map-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 0 16px;
+    height: auto;
+  }
+
+  .map-wrapper {
+    width: 100%;
+    height: 70vh;
+    min-height: 520px;
+    border-radius: 24px;
+  }
+
+  .map-top-content {
+    top: 20px;
+    right: 0;
+    left: 0;
+    max-width: 100%;
+    padding: 20px 32px;
+  }
+
+  .map-title { font-size: 24px; }
+  .map-text { font-size: 16px; max-width: 90%; }
+
+  .map-top-boxes {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .small-box { width: 100%; }
+
+  .map-card {
+    right: 0;
+    left: 0;
+    bottom: 20px;
+    width: 100%;
+    padding-inline: 16px;
+  }
+
+  .map-images { height: 420px; margin-bottom: 16px; }
+  .button { width: 100%; margin: 15px; }
+
+  .side-image-wrapper {
+    width: 100%;
+    height: 660px;
+    border-radius: 24px;
+    overflow: hidden;
+  }
+
+  /* إخفاء أو تعديل الـ pseudo-elements إذا لازم */
+  .map-top-content::before,
+  .map-top-content::after,
+  .map-corner { display: none; }
+}
+
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .map-wrapper { height: 60vh; min-height: 450px; border-radius: 20px; }
+  .map-top-content { padding: 16px 20px; max-width: 100%; }
+  .map-title { font-size: 22px; }
+  .map-text { font-size: 15px; }
+
+  .map-top-boxes { gap: 16px; width: 100%; }
+  .small-box { width: 100%; }
+
+  .map-card { padding-inline: 12px; }
+  .map-images { height: 220px; }
+
+  .button { width: 100%; font-size: 16px; }
+
+  .side-image-wrapper { height: 200px; }
+  .map-top-content::before,
+  .map-top-content::after,
+  .map-corner { display: none; }
+}
+
+@media (max-width: 480px) {
+  .map-section { 
+  grid-template-columns: 1fr; 
+  height: auto; 
+  padding: 0 16px; 
+  gap: 24px; 
+} 
+
+/* الصورة الأولى */ 
+.map-wrapper { 
+  width: 100%; 
+  height: 70vh; 
+  min-height: 520px; 
+  border-radius: 24px; 
+} 
+
+.map-top-content { 
+  top: 20px; 
+  right: 20px; 
+  max-width: 90%; 
+} 
+
+.map-title { 
+  font-size: 24px; 
+} 
+
+.map-text { 
+  font-size: 16px; 
+} 
+
+.map-top-boxes { 
+  display: flex; 
+  flex-direction: column;   /* عمودين تحت بعض */ 
+  gap: 24px; 
+  padding: 0 26px; 
+  height: auto; 
+  width: 550px; 
+} 
+
+.small-box { 
+  max-width: 48%; 
+} 
+
+/* الكارد يفضل راكب على الصورة */ 
+.map-card { 
+  right: 0; 
+  left: 0; 
+  bottom: 20px; 
+  width: 100%; 
+  padding-inline: 10px; 
+} 
+
+/* الصور الصغيرة زي ما هي (3 جنب بعض) */ 
+.map-images { 
+  height: 120px; 
+  margin-bottom: 16px; 
+  margin-right: -85px; 
+} 
+
+.map-img-box { 
+  border-radius: 18px; 
+} 
+
+.button { 
+  width: 95%; 
+  margin: 18; 
+} 
+
+.map-corner,
+.map-top-content::before,
+.map-top-content::after {
+  display: none;
+}
+
+.side-image-wrapper { 
+  width: 100%; 
+  height: 240px; 
+  border-radius: 24px; 
+  overflow: hidden; 
+}
+}

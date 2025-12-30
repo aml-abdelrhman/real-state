@@ -1,0 +1,81 @@
+.reusable-text {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  font-family: "Cairo", "DIN Next Arabic", "Tajawal", sans-serif;
+  font-weight: 300;
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.reusable-text .word {
+  color: #0F1117;
+  font-size: 30px;
+}
+
+.reusable-text .wordtwo {
+  color: #4297A7;
+  font-size: 30px;
+}
+
+.reusable-text .wordthree {
+  color: #000000;
+  font-size: 32px;
+  margin-top: 60px;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+/* Variants */
+.reusable-text.blackArrow .wordthree {
+  color: #000000;
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .reusable-text .word,
+  .reusable-text .wordtwo {
+    font-size: 25px;
+  }
+
+  .reusable-text .wordthree {
+    font-size: 27px;
+    margin-top: 25px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .reusable-text {
+    gap: 3px;
+    justify-content: flex-start;
+  }
+
+  .reusable-text .word,
+  .reusable-text .wordtwo {
+    font-size: 21px;
+  }
+
+  .reusable-text .wordthree {
+    font-size: 22px;
+    margin-top: 20px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .reusable-text {
+    gap: 2px;
+    padding-top:40px
+  }
+
+  .reusable-text .word,
+  .reusable-text .wordtwo {
+    font-size: 18px;
+  }
+
+  .reusable-text .wordthree {
+    font-size: 19px;
+    margin-top: 15px;
+  }
+}
