@@ -1,11 +1,12 @@
-'use client';
+"use client";
 
 import React from "react";
 import Image from "next/image";
-import '../styles/Partners.css';
+import "../styles/Partners.css";
 import ReusableText from "./ReusableText";
-
-// اللوجوهات
+import ar from "../i18n/ar";
+import en from "../i18n/en";
+import { useLang } from "../../context/LangContext";
 const logos = [
   "/images/1.png",
   "/images/2.png",
@@ -13,46 +14,29 @@ const logos = [
   "/images/4.png",
   "/images/5.png",
 ];
-
-const vectors = [
-  { src: "/svg/vector1.png", className: "vector1" },
-  { src: "/svg/vector2.png", className: "vector2" },
-  { src: "/svg/vector3.png", className: "vector3" },
-  { src: "/svg/vector4.png", className: "vector4" },
-  { src: "/svg/vector5.png", className: "vector5" },
-  { src: "/svg/vector6.png", className: "vector6" },
-  { src: "/svg/vector7.png", className: "vector7" },
-  { src: "/svg/vector8.png", className: "vector8" },
-];
-
 const Partners: React.FC = () => {
+  const { locale } = useLang();
+
+  const t = locale === "ar" ? ar : en;
   return (
     <div className="partners-container">
-      
-      {vectors.map((v, index) => (
-        <div key={index} className={`arabic-symbol vector ${v.className}`}>
-          <Image
-            src={v.src}
-            alt={`Vector ${index + 1}`}
-            width={22}  
-            height={22} 
-          />
+      <div className="partners-title" dir={locale === "ar" ? "rtl" : "ltr"}>
+        <ReusableText
+          firstWord={t.mixx.first}
+          secondWord={t.mixx.second}
+          thirdWord={t.mixx.third}
+        />
+        <span className="title-line"></span>
+      </div>
+
+      <div className="partners-marquee">
+        <div className="partners-track">
+          {[...logos, ...logos].map((logo, index) => (
+            <span key={index} className="logo-wrapper">
+              <Image src={logo} alt="" width={180} height={90} />
+            </span>
+          ))}
         </div>
-      ))}
-
-      <ReusableText firstWord="شركاء" secondWord="النجاح" />
-
-      <div className="partners-logos">
-        {logos.map((logo, index) => (
-          <span key={index} className="logo-wrapper">
-            <Image
-              src={logo}
-              alt={`Logo ${index + 1}`}
-              width={138}
-              height={138}
-            />
-          </span>
-        ))}
       </div>
     </div>
   );

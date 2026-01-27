@@ -7,7 +7,7 @@
 }
 
 .about-container {
-  max-width: 1100px;
+  max-width: 1150px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -17,9 +17,10 @@
 .about-image {
   position: relative;
   width: 100%;
-  height: 550px;
+  height: 500px;
   border-radius: 30px;
   overflow: hidden;
+  z-index: 5;
 }
 
 .about-bg-image {
@@ -30,66 +31,72 @@
 .about-overlay-top {
   position: absolute;
   top: 0;
-  right: 0;
   background: #ffffff;
-  padding: 35px 85px;
+  padding: 35px 75px;
   display: flex;
   gap: 10px;
   z-index: 10;
+}
+
+[dir="rtl"] .about-overlay-top {
+  right: 0;
+  left: auto;
   border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 0;
 }
 
-
-.about-overlay-top::before {
-  content: "";
-  position: absolute;
-  bottom: 72px; 
-  left: -30px;     
-  width: 60px;
-  height: 60px;
-  background: #fff;
-  z-index: 5;
-  clip-path: path('M30,0 L60,60 Q30,40 0,60 Z'); /* رأس أعلى، قاعدة منحنية للداخل */
-
- transform: rotate(44deg);
+[dir="ltr"] .about-overlay-top {
+  left: 0;
+  right: auto;
+  border-bottom-right-radius: 40px;
+  border-bottom-left-radius: 0;
 }
 
-.about-overlay-top::before {
-  content: "";
-  position: absolute;
-  bottom: 72px;
-  left: -30px;
-  width: 60px;
-  height: 60px;
-  background: #fff;
-  z-index: 5;
-  clip-path: path('M30,0 L60,60 Q30,40 0,60 Z'); /* رأس أعلى، قاعدة منحنية للداخل */
-  transform: rotate(44deg);
-}
-
+.about-overlay-top::before,
 .about-overlay-top::after {
   content: "";
   position: absolute;
-  bottom: -40px;
-  right: -40px;
   width: 60px;
   height: 60px;
   background: #fff;
-  z-index: 5;
-  clip-path: path('M30,0 L60,60 Q30,40 0,60 Z'); /* نفس الشكل */
-  transform: rotate(-300deg) scaleX(-1); /* قلب أفقي وتحريك نفس الزاوية */
+  z-index: 15;
+  clip-path: path('M30,0 L60,60 Q30,40 0,60 Z');
+}
+
+[dir="rtl"] .about-overlay-top::before {
+  left: -30px;
+  bottom: 72px;
+  transform: rotate(44deg);
+}
+
+[dir="rtl"] .about-overlay-top::after {
+  right: -40px;
+  bottom: -40px;
+  transform: rotate(-300deg) scaleX(-1);
+}
+
+[dir="ltr"] .about-overlay-top::before {
+  right: -30px;
+  left: auto;
+  bottom: 72px;
+  transform: rotate(-44deg);
+}
+
+[dir="ltr"] .about-overlay-top::after {
+  left: -40px;
+  right: auto;
+  bottom: -40px;
+  transform: rotate(300deg) scaleX(-1);
 }
 
 .reusable-text {
   margin-top: -30px;
-  margin-right: -50px;
 }
-
 
 .overlay-arrow {
   font-family: 'Font Awesome 6 Pro';
   font-style: normal;
-  font-weight: 300;
+  font-weight: 500;
   font-size: 35px;
   line-height: 48px;
   display: flex;
@@ -98,40 +105,51 @@
   margin-top: -30px;
 }
 
+[dir="rtl"] .overlay-arrow {
+  margin-left: 40px;
+}
+
+[dir="ltr"] .overlay-arrow {
+  margin-right: 40px;
+  transform: rotate(90deg);
+}
+
 .about-text {
   position: absolute;
   bottom: 0;
   width: 100%;
   color: #ffffff;
-  background: linear-gradient(180deg, rgba(15, 17, 23, 0) 0%, rgba(15, 17, 23, 0.9) 60%);
-  opacity: 0.8;
-  padding: 110px;
+  background: linear-gradient(180deg, rgba(68,73,88,0) 0%, rgba(24,27,34,0.7) 100%);
+  opacity: 1;
+  padding: 145px;
   border-radius: 12px;
   text-align: right;
-  font-size: 24px;
-  line-height: 1.8;
+  font-size: 27px;
+  line-height: 1.4;
 }
 
 .about-box {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px; 
+  gap: 16px;
 }
 
-.small-box-first ,
+.small-box-first,
 .small-box-second {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 22px;
   border-radius: 36px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  padding: 10px 35px;
-  width: 95%; 
+  padding: 25px 55px;
+  width: 95%;
 }
 
-.small-box-first {
+.small-box-second:hover {
   background: #6F6259;
   color: #fff;
+  cursor:pointer;
 }
 
 .small-box-second {
@@ -140,8 +158,8 @@
 }
 
 .icon-circle {
-  width: 48px;
-  height: 48px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -166,17 +184,16 @@
 }
 
 .box-number-text {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
 }
 
 .box-desc-text {
-  font-size: 14px;
+  font-size: 16px;
   opacity: 0.8;
 }
 
 @media (max-width: 1024px) {
-
   .about-image {
     height: 480px;
     border-radius: 24px;
@@ -184,34 +201,17 @@
 
   .about-overlay-top {
     padding: 28px 60px;
-    border-bottom-left-radius: 32px;
   }
 
-.about-overlay-top::before {
-  content: "";
-  position: absolute;
-  bottom: 72px;
-  left: -30px;
-  width: 60px;
-  height: 60px;
-  background: #fff;
-  z-index: 5;
-  clip-path: path('M30,0 L60,60 Q30,40 0,60 Z'); /* رأس أعلى، قاعدة منحنية للداخل */
-  transform: rotate(44deg);
-}
+  .about-overlay-top::before,
+  .about-overlay-top::after {
+    width: 50px;
+    height: 50px;
+      left: -40px;
+  bottom: 52px;
+  transform: rotate(84deg);
+  }
 
-.about-overlay-top::after {
-  content: "";
-  position: absolute;
-  bottom: -40px;
-  right: -40px;
-  width: 60px;
-  height: 60px;
-  background: #fff;
-  z-index: 5;
-  clip-path: path('M30,0 L60,60 Q30,40 0,60 Z'); /* نفس الشكل */
-  transform: rotate(-300deg) scaleX(-1); /* قلب أفقي وتحريك نفس الزاوية */
-}
   .about-text {
     padding: 80px 50px;
     font-size: 18px;
@@ -222,9 +222,7 @@
   }
 }
 
-
 @media (max-width: 768px) {
-
   .about-image {
     height: 420px;
   }
@@ -234,38 +232,8 @@
     gap: 6px;
   }
 
-.about-overlay-top::before {
-  content: "";
-  position: absolute;
-  bottom: 72px;
-  left: -30px;
-  width: 60px;
-  height: 60px;
-  background: #fff;
-  z-index: 5;
-  clip-path: path('M30,0 L60,60 Q30,40 0,60 Z'); /* رأس أعلى، قاعدة منحنية للداخل */
-  transform: rotate(44deg);
-}
-
-.about-overlay-top::after {
-  content: "";
-  position: absolute;
-  bottom: -40px;
-  right: -40px;
-  width: 60px;
-  height: 60px;
-  background: #fff;
-  z-index: 5;
-  clip-path: path('M30,0 L60,60 Q30,40 0,60 Z'); /* نفس الشكل */
-  transform: rotate(-300deg) scaleX(-1); /* قلب أفقي وتحريك نفس الزاوية */
-}
-  .reusable-text {
-    margin: 0;
-  }
-
   .overlay-arrow {
     font-size: 26px;
-    margin-top: 0;
   }
 
   .about-text {
@@ -298,42 +266,19 @@
   }
 }
 
-
 @media (max-width: 480px) {
-
-   .about-overlay-top {
+  .about-overlay-top {
     padding: 8px 16px;
-    border-bottom-left-radius: 32px;
   }
 
-  
-.about-overlay-top::before {
-  content: "";
-  position: absolute;
-  bottom: 72px;
-  left: -30px;
-  width: 60px;
-  height: 60px;
-  background: #fff;
-  z-index: 5;
-  clip-path: path('M30,0 L60,60 Q30,40 0,60 Z'); /* رأس أعلى، قاعدة منحنية للداخل */
-  transform: rotate(44deg);
-}
+  .about-overlay-top::before,
+  .about-overlay-top::after {
+    width: 45px;
+    height: 75px;
+  }
 
-.about-overlay-top::after {
-  content: "";
-  position: absolute;
-  bottom: -40px;
-  right: -40px;
-  width: 60px;
-  height: 60px;
-  background: #fff;
-  z-index: 5;
-  clip-path: path('M30,0 L60,60 Q30,40 0,60 Z'); /* نفس الشكل */
-  transform: rotate(-300deg) scaleX(-1); /* قلب أفقي وتحريك نفس الزاوية */
-}
   .about-text {
-    padding: 45px 20px;
+    padding: 95px 20px;
     font-size: 15px;
   }
 }

@@ -1,0 +1,86 @@
+.presentations-page {
+  padding: 30px;
+  font-family: Cairo, sans-serif;
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Top dropdown */
+.top-dropdown {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.top-dropdown select {
+  padding: 10px;
+  min-width: 220px;
+}
+
+/* Box */
+.content-box {
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  padding: 20px;
+}
+
+/* Dropdown row */
+.dropdowns-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+/* Dropdown box */
+.dropdown-box {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.dropdown-btn {
+  width: 100%;
+  padding: 10px;
+  background: #f5f5f5;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Content */
+.dropdown-content {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Item */
+.doc-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.doc-info {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+}
+
+.doc-links {
+  display: flex;
+  gap: 12px;
+}
+
+.doc-links a {
+  color: #0a58ca;
+  font-weight: 600;
+  text-decoration: none;
+}

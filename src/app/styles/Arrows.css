@@ -4,45 +4,32 @@
   justify-content: center;
   align-items: center;
 }
-
-.left {
-  width: 41px;
-  height: 41px;
-  border-radius: 50%;
-  background: #4297a7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 21px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  border: 1px solid #2c4564;
-  color: #ffffff;
-}
-
+.left,
 .right {
   width: 41px;
   height: 41px;
   border-radius: 50%;
   background: transparent;
-  border: 1px solid #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 21px;
   cursor: pointer;
   transition: transform 0.3s ease;
-  color: #ffffff;
+  border: 1px solid; 
+  color: inherit; 
 }
 
-.arrow:hover {
-  transform: scale(1.1);
+.left:hover,
+.right:hover {
+  color: #4297a7;
+  border-color: #4297a7;
 }
-
 /* Tablets (up to 1024px) */
 @media (max-width: 1024px) {
   .hero-arrows-wrapper {
     gap: 10px;
+    margin-left: 20px;
 
   }
 
@@ -58,7 +45,7 @@
 @media (max-width: 768px) {
   .hero-arrows-wrapper {
     gap: 8px;
-    margin-top:46px;
+    margin-top:26px;
   }
 
   .left,
@@ -73,6 +60,8 @@
 @media (max-width: 480px) {
   .hero-arrows-wrapper {
     gap: 6px;
+    margin-right: 300px; /* أقرب للنقطة النهائية للنيفبار */
+
   }
 
   .left,

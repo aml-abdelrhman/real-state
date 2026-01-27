@@ -1,130 +1,148 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import ReusableText from '../components/ReusableText';
-import Arrows from './Arrows';
-import '../styles/LatestProjects.css';
+import React, { useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import ReusableText from "../components/ReusableText";
+import Arrows from "./Arrows";
+import "../styles/LatestProjects.css";
+import { useLang } from "../../context/LangContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
+import type { Swiper as SwiperType } from "swiper";
+
+import { lastProjectsEn } from "../i18n/lastProjectsEn";
+import { lastProjectsAr } from "../i18n/lastProjectsAr";
 
 type Project = {
   id: number;
   title: string;
   description: string[][];
+  details: string[];
   image: string;
+  slug: string;
 };
 
-const projects: Project[] = [
-  {
-    id: 1,
-    title: ' ',
-    description: [
-      ['الجادة الأولى للتطوير العقاري', 'هي أحد الشركات المتميزة', 'في الاستثمار والتطوير العقاري'],
-      ['والتي يقع مقرها ...'],
-    ],
-    image: '/images/a.png',
-  },
-  {
-    id: 2,
-    title: 'جادة الأعمال (القيروان)',
-    description: [
-      ['النخيل 27 وحدة', '3,300 م²', 'نسبة الإنجاز 100%'],
-      ['الجادة الأولى للتطوير العقاري هي أحد الشركات المتميزة والتي يقع مقرها ...'],
-    ],
-    image: '/images/hero1.png',
-  },
-  {
-    id: 3,
-    title: 'جادة الدرعية',
-    description: [
-      ['النخيل 30 وحدة', '4,200 م²', 'نسبة الإنجاز 90%'],
-      ['الجادة الأولى للتطوير العقاري هي أحد الشركات المتميزة والتي يقع مقرها ...'],
-    ],
-    image: '/images/hero5.png',
-  },
-];
+export default function LatestProjects() {
+  const swiperRef = useRef<SwiperType | null>(null);
+  const { locale, t } = useLang();
 
-const LatestProjects: React.FC = () => {
-  const [activeIndex, setActiveIndex] = useState(1);
-
-  // تحديد ترتيب العناصر لعرض الكارت النشط في الوسط
-  const getOrder = (index: number) => {
-    if (index === activeIndex) return 2;
-    if (index === (activeIndex - 1 + projects.length) % projects.length) return 1;
-    if (index === (activeIndex + 1) % projects.length) return 3;
-    return 4;
-  };
-
-  const prevProject = () => {
-    setActiveIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
-  };
-
-  const nextProject = () => {
-    setActiveIndex((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
-  };
+  const projects: Project[] =
+    locale === "ar"
+      ? Object.values(lastProjectsAr)
+      : Object.values(lastProjectsEn);
 
   return (
-    <section className="latest-projects-section" id="latest-projects">
+    <section
+      className="latest-projects-section"
+      dir={locale === "ar" ? "rtl" : "ltr"}
+    >
       <div className="container">
         <div className="projects-top-bar">
           <ReusableText
-            firstWord=" أحدث"
-            secondWord="المشاريع "
-            thirdWord="↙"
-            
-           
+            firstWord={t?.uxx?.first ?? ""}
+            secondWord={t?.uxx?.second ?? ""}
+            thirdWord={t?.uxx?.third ?? ""}
+
           />
-<Arrows
-  onPrev={prevProject}
-  onNext={nextProject}
-  leftColor="#ffffff"
-  leftBackground="#4297a7"
-  rightColor="#000000"
-  rightBackground="#transparent"
-/>
 
+          <Arrows
+            onPrev={() => swiperRef.current?.slidePrev()}
+            onNext={() => swiperRef.current?.slideNext()}
+            leftColor="#808080"
+            rightColor="#808080"
+            leftBorderColor="#808080"
+            rightBorderColor="#808080"
+            leftBackground="transparent"
+            rightBackground="transparent"
+            rightHoverBackground="#4297a7"
+            leftHoverBackground="#4297a7"
+          />
         </div>
 
-        <div className="projects-wrapper">
-          {projects.map((project, index) => {
-            const isActive = index === activeIndex;
-
-            return (
-              <motion.div
-                key={project.id}
-                className={`project-card ${isActive ? 'active' : 'inactive'}`}
-                style={{ order: getOrder(index) }}
-                layout
-                transition={{ type: 'spring', stiffness: 260, damping: 30 }}
-                onClick={() => setActiveIndex(index)}
-              >
-                <div className="image-wrapper">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    priority={isActive}
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
-
-                <h3>{project.title}</h3>
-
-                <div className="description-wrapper">
-                  <div className="line">
-                    {project.description[0].map((item, i) => (
-                      <span key={i}>{item}</span>
-                    ))}
+        <Swiper
+          key={locale} 
+          modules={[Autoplay]}
+          autoplay={{ delay: 3500 }}
+          slidesPerView={1.9}
+          centeredSlides
+          spaceBetween={40}
+          loop
+          onSwiper={(s) => (swiperRef.current = s)}
+          breakpoints={{
+            0: { slidesPerView: 1, loop: false },
+            768: { slidesPerView: 1, loop: false },
+            1024: { slidesPerView: 1.9, loop: true },
+          }}
+        >
+          {projects.map((project) => (
+            <SwiperSlide key={project.id}>
+              <Link href={`/projects/${project.slug}`} className="card-link">
+                <div className="project-card">
+                  <div className="image-wrapper">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      style={{ objectFit: "cover" }}
+                    />
                   </div>
-                  <div className="line line2">{project.description[1][0]}</div>
+ <div className="project-info-grid">
+                      <div className="project-col project-col-info">
+                        <h3>{project.title}</h3>
+
+                        <div className="row">
+                          <span className="location-first">
+                            <FontAwesomeIcon
+                              icon={faLocationDot}
+                              className="info-icon"
+                            />
+                            <span className="info-label">
+                              {locale === "ar" ? "الموقع:" : "Location:"}
+                            </span>
+                            <span className="info-value">
+                              {project.description[0][1]}
+                            </span>
+                          </span>
+
+                          <span className="info-value">
+                            {project.description[0][2]}{" "}
+                            {project.description[0][3]}
+                          </span>
+                          <span className="info-value">
+                            {project.description[1][0]}{" "}
+                            {project.description[1][1]}
+                          </span>
+                        </div>
+
+                        <div className="row">
+                          <span className="progress-row">
+                            <span className="info-label">
+                              {locale === "ar"
+                                ? "نسبة الإنجاز:"
+                                : "Completion:"}
+                            </span>
+                            <span className="info-value">
+                              {project.description[1][3]}
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+
+
+                    <div className="project-col project-col-details">
+                      <p>{project.details[0]}</p>
+                    </div>
+                  </div>
                 </div>
-              </motion.div>
-            );
-          })}
-        </div>
+              </Link>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </section>
   );
-};
-
-export default LatestProjects;
+}

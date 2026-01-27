@@ -3,6 +3,9 @@
 import React from 'react';
 import Image from 'next/image';
 import '../styles/Footer.css';
+import ar from "../i18n/ar";
+import en from "../i18n/en";
+import { useLang } from "../../context/LangContext";
 
 const footerVectors = [
   { src: '/svg/vector1.png', className: 'fvector1' },
@@ -16,24 +19,19 @@ const footerVectors = [
 ];
 
 const Footer: React.FC = () => {
+  const { locale } = useLang();
+  const t = locale === "ar" ? ar : en;
+
   return (
-    <footer className="footer">
-      
+<footer className="footer" dir={locale === "ar" ? "rtl" : "ltr"}>
       {footerVectors.map((item, index) => (
-        <div
-          key={index}
-          className={`footer-vector ${item.className}`}
-        >
-          <Image
-            src={item.src}
-            alt={`Footer Vector ${index + 1}`}
-            width={22}
-            height={22}
-          />
+        <div key={index} className={`footer-vector ${item.className}`}>
+          <Image src={item.src} alt="" width={22} height={22} />
         </div>
       ))}
 
       <div className="footer-container">
+        {/* Logo */}
         <div className="footer-col footer-col-logo">
           <Image
             src="/images/logo.png"
@@ -44,51 +42,53 @@ const Footer: React.FC = () => {
             className="logo-img"
           />
           <div className="logo-texts">
-            <span className="slogan-one">FIRST AVENUE</span>
-            <span className="slogan-two">Real Estate Development</span>
-            <span className="slogan-three">
-              الجادّة الأولى للتطوير العقاري
-            </span>
+            <span className="slogan-one">{t.footer.slogan.enTitle}</span>
+            <span className="slogan-two">{t.footer.slogan.enSubTitle}</span>
+            <span className="slogan-three">{t.footer.slogan.arTitle}</span>
           </div>
         </div>
 
+        {/* Company */}
         <div className="footer-col">
-          <h4>الشركة</h4>
+          <h4>{t.footer.company.title}</h4>
           <ul>
-            <li><a href="#">كلمة الرئيس</a><span className="arrow">↖</span></li>
-            <li><a href="#">نبذة عن الشركة</a><span className="arrow">↖</span></li>
-            <li><a href="#">تواصلوا معنا</a><span className="arrow">↖</span></li>
+            {t.footer.company.links.map((item, i) => (
+              <li key={i}>
+                <a href="#">{item.label}</a>
+                <span className="arrow">{item.arrow}</span>
+              </li>
+            ))}
           </ul>
         </div>
 
+        {/* Projects */}
         <div className="footer-col">
-          <h4>المشاريع</h4>
+          <h4>{t.footer.projects.title}</h4>
           <ul>
-            <li><a href="#">الفريق التنفيذي</a><span className="arrow">↖</span></li>
-            <li><a href="#">كبار التنفيذيين</a><span className="arrow">↖</span></li>
-            <li><a href="#">أعمالنا</a><span className="arrow">↖</span></li>
+            {t.footer.projects.links.map((item, i) => (
+              <li key={i}>
+                <a href="#">{item.label}</a>
+                <span className="arrow">{item.arrow}</span>
+              </li>
+            ))}
           </ul>
         </div>
 
+        {/* Contact */}
         <div className="footer-col">
-          <h4>معلومات الاتصال</h4>
+          <h4>{t.footer.contact.title}</h4>
           <ul>
-            <li>
-              <span className="contact-text">
-                الرياض: طريق الأمير تركي بن عبد العزيز الأول - حي حطين مبنى 6957 - وحدة رقم 3
-              </span>
-            </li>
-            <li><span className="contact-text">٠٩٦٦١١٢٣٦٢٠٠٩+</span></li>
-            <li><span className="contact-text">info@the1stavenue.com</span></li>
+            <li><span className="contact-text">{t.footer.contact.address}</span></li>
+            <li><span className="contact-text">{t.footer.contact.phone}</span></li>
+            <li><span className="contact-text">{t.footer.contact.email}</span></li>
           </ul>
         </div>
       </div>
 
       <div className="footer-bottom">
-        <p>جميع الحقوق محفوظة . شركة الجادة الاولى للتطوير العقاري 2025</p>
+        <p>{t.footer.copyright}</p>
       </div>
     </footer>
   );
 };
-
 export default Footer;

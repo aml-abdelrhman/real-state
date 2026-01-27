@@ -1,93 +1,58 @@
 'use client';
 
-import Image from "next/image";
-import "../styles/MapCard.css";
+import Image from 'next/image';
+import ReusableText from './ReusableText';
+import '../styles/MapCard.css';
+import { useLang } from '../../context/LangContext';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBuilding, faHouse } from "@fortawesome/free-solid-svg-icons";
+import { miLang ,miiLang} from '../i18n/types';
+import ar from '../i18n/ar';
+import en from '../i18n/en';
 
 const MapCard = () => {
+  const openPage = () => {
+    window.location.href = '/your-page';
+  };
+
+  const { locale } = useLang();
+
+  const t = locale === "ar" ? ar : en;
+
   return (
     <section className="map-section">
-      <div className="map-wrapper">
-        <Image
-          src="/images/map2.jpg"
-          alt="map"
-          fill
-          className="map-bg"
-          priority
-        />
 
-        <span className="map-corner" />
-
-        <div className="map-blur" />
-
-        <div className="map-top-content">
-          <h2 className="map-title"> جادة الدرعية</h2>
-
-          <p className="map-text">
-             عندما يجتمع الفن والرقي والعصرية في مجمع سكني فاخر.        
-          </p>
-          <div className="map-top-boxes">
-            <div className="small-box">
-              <div className="icon-circle">
-                <FontAwesomeIcon icon={faHouse} />
-              </div>
-
-              <div className="box-text">
-                <div className="box-number-text">
-                ٧٦ وحدة 
-                </div>
-                <div className="box-desc-text">
-                 اجمالي عدد الوحدات
-                </div>
-              </div>
-            </div>
-
-             <div className="small-box">
-              <div className="icon-circle">
-                <FontAwesomeIcon icon={faBuilding} />
-              </div>
-
-              <div className="box-text">
-                <div className="box-number-text">
-                  +٢٢٫٤ ألف م<sup>٢</sup>
-                </div>
-                <div className="box-desc-text">
-                  إجمالي مساحة البناء
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="map-card">
-          <div className="map-images">
-            <div className="map-img-box">
-              <Image src="/images/map4.jpg" alt="img1" fill />
-            </div>
-
-            <div className="map-img-box">
-              <Image src="/images/map2.jpg" alt="img2" fill />
-            </div>
-
-            <div className="map-img-box">
-              <Image src="/images/map3.jpg" alt="img3" fill />
-            </div>
-          </div>
-
-          <button className="button">  المزيد ↖</button>
-        </div>
-      </div>
+      <div className="reusable-text-overlay"dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+                      <ReusableText
+                        firstWord={t.mi.first}
+                        secondWord={t.mi.second}
+                        thirdWord={t.mi.third} 
+                              />                            
+                  </div>
 
       <div className="side-image-wrapper">
         <Image
-          src="/images/map.png"
-          alt="side"
+          src="/images/mapp.png"
+          alt="map"
           fill
           className="side-image"
           priority
         />
+
+        <button
+          className="map-button"
+          onClick={openPage}
+          data-tooltip={t.mii.btn}
+        >
+          ⬤
+        </button>
+
+        <button
+          className="map-button2"
+          onClick={openPage}
+          data-tooltip={t.mii.btn2}
+        >
+          ⬤
+        </button>
       </div>
     </section>
   );

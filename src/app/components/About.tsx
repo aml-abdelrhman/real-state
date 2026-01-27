@@ -1,67 +1,95 @@
-import Image from "next/image";
-import "../styles/About.css";
-import ReusableText from "../components/ReusableText";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBuilding, faSackDollar, faHouse } from "@fortawesome/free-solid-svg-icons";
-import { config } from "@fortawesome/fontawesome-svg-core";
-import "@fortawesome/fontawesome-svg-core/styles.css";
+'use client';
+
+import React from 'react';
+import Image from 'next/image';
+import '../styles/About.css';
+import ReusableText from './ReusableText';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { config } from '@fortawesome/fontawesome-svg-core';
+import { useLang } from '../../context/LangContext';
+import { motion } from 'framer-motion';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 config.autoAddCss = false;
 
+export type Box = {
+  icon?: IconProp;
+  number: string;
+  desc: string;
+};
+
+type AboutContent = {
+  overlayFirst: string;
+  overlaySecond: string;
+  text: string;
+  boxes: Box[];
+};
+
 const About: React.FC = () => {
+  const { t, locale } = useLang();
+
+  const about: AboutContent | undefined = t?.about;
+
+  if (!about) return null;
+
   return (
     <section className="about-section">
       <div className="about-container">
-        <div className="about-image">
-          <Image
-            src="/images/about-bg.jpg"
-            alt="About Background"
-            fill
-            className="about-bg-image"
-            priority
-          />
-          <div className="about-overlay-top">
-            <ReusableText firstWord="من" secondWord="نحن" />
-            <span className="overlay-arrow">↙</span>
+        <motion.div
+          className="about-image-wrapper"
+          initial={{ x: locale === 'ar' ? -100 : 100, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
+          <div className="about-image">
+            <Image
+              src="/images/about.jpg"
+              alt="About Background"
+              fill
+              className="about-bg-image"
+              priority
+            />
+
+            <div
+              className="about-overlay-top"
+              dir={locale === 'ar' ? 'rtl' : 'ltr'}
+            >
+              <ReusableText
+                firstWord={about.overlayFirst}
+                secondWord={about.overlaySecond}
+              />
+              <span className="overlay-arrow">{locale === 'ar' ? '↙' : '↘'}</span>
+            </div>
+
+            <p className="about-text">{about.text}</p>
           </div>
-          <p className="about-text">
-            الجادة الأولى للتطوير العقاري هي أحد الشركات المتميزة في الاستثمار
-            والتطوير العقاري، والتي يقع مقرها في الرياض. حققت الشركة نمو متسارعا
-            لتصبح إحدى الشركات البارزة والرائدة في صناعة فرص الاستثمار المستدام
-            من خلال التطوير العقاري المبتكر.
-          </p>
-        </div>
+        </motion.div>
 
         <div className="about-box">
-          <div className="small-box-first">
-            <div className="icon-circle">
-              <FontAwesomeIcon icon={faBuilding} size="lg" />
-            </div>
-            <div className="box-text">
-              <div className="box-number-text">+١٢٩ ألف م<sup>٢</sup></div>
-              <div className="box-desc-text">إجمالي مساحة البناء</div>
-            </div>
-          </div>
+          {about.boxes.map((box: Box, idx: number) => (
+            <motion.div
+              key={idx}
+              className="small-box-second"
+              initial={{ y: 80, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+              whileHover={{ y: -10, scale: 1.03 }}
+            >
+              {box.icon && (
+                <div className="icon-circle">
+                  <FontAwesomeIcon icon={box.icon} size="lg" />
+                </div>
+              )}
 
-          <div className="small-box-second">
-            <div className="icon-circle">
-              <FontAwesomeIcon icon={faSackDollar} size="lg" />
-            </div>
-            <div className="box-text">
-              <div className="box-number-text">+٢ مليار ريال</div>
-              <div className="box-desc-text">حجم المشاريع</div>
-            </div>
-          </div>
-
-          <div className="small-box-second">
-            <div className="icon-circle">
-              <FontAwesomeIcon icon={faHouse} size="lg" />
-            </div>
-            <div className="box-text">
-              <div className="box-number-text">+٢٥ مشروع</div>
-              <div className="box-desc-text">إجمالي عدد المشاريع</div>
-            </div>
-          </div>
+              <div className="box-text">
+                <div className="box-number-text">{box.number}</div>
+                <div className="box-desc-text">{box.desc}</div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

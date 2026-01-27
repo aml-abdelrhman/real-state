@@ -1,0 +1,98 @@
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-texts {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.slogan-one {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "DM Serif Display", sans-serif;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.slogan-two {
+  font-size: 11px;
+  opacity: 0.9;
+  font-family: "DM Serif Display", sans-serif;
+  white-space: nowrap;
+}
+
+.slogan-three {
+  font-size: 10px;
+  opacity: 0.85;
+  font-family: "Cairo", sans-serif;
+  direction: rtl;
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.loader-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4379be;
+  font-family: "Cairo", sans-serif;
+}
+
+.loader-dots {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.loader-dots span {
+  width: 10px;
+  height: 10px;
+  background-color: #4379be;
+  border-radius: 50%;
+  display: inline-block;
+  animation: moveDots 1s infinite alternate;
+}
+
+.loader-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loader-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes moveDots {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(6px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

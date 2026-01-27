@@ -1,59 +1,64 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
 import Navbar from './Navbar';
+import { useLang } from '../../context/LangContext';
 import '../styles/Hero.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import Arrows from './Arrows';
+import Image from 'next/image';
+import Link from 'next/link';
 
-const slides = [
-  { bg: '/images/hero1.png', fg: '/images/hero2.png', title: 'استثمار عقاري واعد' },
-  { bg: '/images/a.png', fg: '/images/aa.png', title: 'تطوير حضري مبتكر' },
-  { bg: '/images/hero5.png', fg: '/images/hero6.png', title: 'تطوير حضري مبتكر' },
+type HeroTitleKey = 'title1' | 'title2';
+
+const slidesData: { bg: string; titleKey: HeroTitleKey }[] = [
+  { bg: '/images/hero1.png', titleKey: 'title1' },
+  { bg: '/images/hero7.png', titleKey: 'title1' },
 ];
 
 const Hero: React.FC = () => {
+  const { t } = useLang();
   const [current, setCurrent] = useState(0);
+
+  // تحقق من وجود t.hero
+  const slides = slidesData.map((slide) => ({
+    ...slide,
+    title: t?.hero?.[slide.titleKey] || 'Title not found',
+  }));
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrent(prev => (prev + 1) % slides.length);
-    }, 7000);
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 5000);
+
     return () => clearInterval(interval);
-  }, []);
+  }, [slides.length]);
 
   const slide = slides[current];
 
   return (
     <section className="hero-section relative">
       <Navbar />
-      {slide.bg && (
-        <Image
-          src={slide.bg}
-          alt={`Background ${current}`}
-          fill
-          sizes="100vw"
-          className="hero-bg"
-          style={{ objectFit: 'cover', objectPosition: 'center', zIndex: -2 }}
-        />
-      )}
 
       <AnimatePresence mode="wait">
         <motion.div
           key={current}
-          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }}
-          initial={{ scale: 1 }}
-          animate={{ scale: 1.2 }}
-          exit={{}}
-          transition={{ duration: 1.5, ease: 'easeOut' }}
+          className="hero-bg"
+          initial={{ x: 80, opacity: 1, scale: 1 }}
+          animate={{ x: 0, opacity: 1, scale: 1.1 }}
+          exit={{ x: -80, opacity: 1 }}
+          transition={{
+            x: { type: 'tween', duration: 0.13 },
+            scale: { duration: 5, ease: 'linear' },
+          }}
         >
           <Image
-            src={slide.fg}
-            alt={`Foreground ${current}`}
+            src={slide.bg}
+            alt="Hero Background"
             fill
             sizes="100vw"
-            className="hero-image"
+            style={{ objectFit: 'cover' }}
+            priority
           />
         </motion.div>
       </AnimatePresence>
@@ -61,16 +66,30 @@ const Hero: React.FC = () => {
       <div className="hero-content-wrapper">
         <div className="hero-content">
           <div className="hero-text">
-            <h2>{slide.title}</h2>
-            <p>
-              الجادة الأولى للتطوير العقاري هي أحد الشركات المتميزة في الاستثمار والتطوير العقاري،
-              والتي يقع مقرها في الرياض. حققت الشركة نمو متسارعا لتصبح إحدى الشركات البارزة والرائدة
-              في صناعة فرص الاستثمار المستدام من خلال التطوير العقاري المبتكر.
-            </p>
-            <button className="hero-btn">
-              أعمالنا
-              <span className="first-arrow">↖</span>
-            </button>
+            <motion.h2
+              initial={{ y: 90, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ type: 'tween', duration: 0.6 }}
+            >
+              {slide.title}
+            </motion.h2>
+
+            <motion.p
+              initial={{ y: 80, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ type: 'tween', duration: 0.6, delay: 0.15 }}
+            >
+              {t?.hero?.desc || ''}
+            </motion.p>
+
+            <Link href="/LatestProjects">
+              <button className="hero-btn">
+                {t?.hero?.btn || 'Our Works'}
+                <span className="first-arrow">↖</span>
+              </button>
+            </Link>
           </div>
 
           <Arrows

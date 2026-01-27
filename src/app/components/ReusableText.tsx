@@ -11,6 +11,10 @@ interface ReusableTextProps {
   firstFontSize?: number;   
   secondFontSize?: number;  
   thirdFontSize?: number;
+  firstColor?: string;   // لون الكلمة الأولى
+  secondColor?: string;  // لون الكلمة الثانية
+  thirdColor?: string;   // لون الكلمة الثالثة
+  className?: string;    // أي كلاس إضافي
 }
 
 const ReusableText: React.FC<ReusableTextProps> = ({
@@ -18,15 +22,27 @@ const ReusableText: React.FC<ReusableTextProps> = ({
   secondWord,
   thirdWord,
   variant = "default",
-  firstFontSize = 24,
-  secondFontSize = 24,
-  thirdFontSize = 30
+  firstFontSize = 30,
+  secondFontSize = 30,
+  thirdFontSize = 30,
+    firstColor="#4297a7",
+  secondColor = "#000",
+  thirdColor = "#000",
+  className = "",
 }) => {
   return (
-    <div className={`reusable-text ${variant}`}>
-      <span className="word" style={{ fontSize: `${firstFontSize}px` }}>{firstWord}</span>
-      <span className="wordtwo" style={{ fontSize: `${secondFontSize}px` }}>{secondWord}</span>
-      {thirdWord && <span className="wordthree" style={{ fontSize: `${thirdFontSize}px` }}>{thirdWord}</span>}
+    <div className={`reusable-text ${variant} ${className}`}>
+      <span className="word" style={{ fontSize: `${firstFontSize}px`, color: firstColor }}>
+        {firstWord}
+      </span>
+      <span className="wordtwo" style={{ fontSize: `${secondFontSize}px`, color: secondColor }}>
+        {secondWord}
+      </span>
+      {thirdWord && (
+        <span className="wordthree" style={{ fontSize: `${thirdFontSize}px`, color: thirdColor }}>
+          {thirdWord}
+        </span>
+      )}
     </div>
   );
 };

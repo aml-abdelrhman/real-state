@@ -1,4 +1,6 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap");
+
 
 *,
 *::before,
@@ -9,21 +11,16 @@
 }
 
 html {
-  direction: rtl;
   scroll-behavior: smooth;
+  font-family: "Cairo", sans-serif;
 }
 
 body {
-  font-family: "Cairo", sans-serif;
   background-color: #ffffff;
   color: #000000;
   line-height: 1.6;
 }
 
-/* img {
-  max-width: 100%;
-  display: block;
-} */
 
 button {
   font-family: inherit;
@@ -36,6 +33,40 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+
+[dir="rtl"] {
+  direction: rtl;
+}
+
+[dir="ltr"] {
+  direction: ltr;
+}
+
+[dir="rtl"] p,
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] .text {
+  text-align: right;
+}
+
+[dir="ltr"] p,
+[dir="ltr"] h1,
+[dir="ltr"] h2,
+[dir="ltr"] h3,
+[dir="ltr"] .text {
+  text-align: left;
+}
+
+[dir="rtl"] .flex {
+  flex-direction: row-reverse;
+}
+
+[dir="ltr"] .flex {
+  flex-direction: row;
+}
+
 
 .navbar {
   display: flex;
@@ -99,55 +130,16 @@ a {
   border: none;
   color: #ffffff;
   font-size: 16px;
-  transition: transform 0.2s ease;
 }
 
-.nav-btn:hover {
-  transform: scale(1.05);
-}
 
 .nav-arrow {
   font-size: 14px;
   transform: rotate(30deg);
 }
 
-@media (max-width: 1024px) {
-  .navbar {
-    padding: 15px 25px;
-  }
-  .button-container {
-    gap: 25px;
-  }
-  .nav-btn {
-    font-size: 14px;
-  }
+
+[dir="rtl"] .nav-arrow {
+  transform: rotate(-30deg);
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    gap: 20px;
-  }
-  .logo {
-    justify-content: center;
-  }
-  .button-container {
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .logo-texts {
-    display: none;
-  }
-  .button-container {
-    padding: 12px 20px;
-    gap: 15px;
-  }
-  .nav-btn {
-    font-size: 13px;
-  }
-}
