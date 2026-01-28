@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import {
   FaEnvelope,
@@ -11,6 +10,9 @@ import {
 } from 'react-icons/fa';
 import '../styles/Contact.css';
 import { useLang } from '../../context/LangContext';
+import Navbar from '../components/Navbar';
+
+
 const translations = {
   ar: {
     pageName: 'اتصل بنا',
@@ -111,16 +113,14 @@ const ContactPage: React.FC = () => {
 
   return (
     <>
-      <Navbar />
-
+      
+     <Navbar />
       <Header
         imageSrc="/images/about.jpg"
         pageName="اتصل بنا" 
-        showBar={false}
-        topLink={{ label: t.home, href: '/' }}
-      />
-
-      {/* ===== CONTACT INFO ===== */}
+              showBar={false}
+              topLink={{ label: locale === "ar" ? "الرئيسية" : "Home", href: "/" }}
+     />
       <section className="contact-info" dir={dir}>
         <a href="mailto:info@the1stavenue.com" className="info-card">
           <div className="icon-circle">
@@ -220,7 +220,7 @@ const ContactPage: React.FC = () => {
               {messageError && (
                 <span className="error-text">{messageError}</span>
               )}
-              <button type="submit">{t.form.send}</button>
+              <button className="form-group-btn" type="submit">{t.form.send}</button>
             </div>
           </div>
         </form>

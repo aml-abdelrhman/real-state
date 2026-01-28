@@ -32,7 +32,6 @@
   grid-column: span 3;      
   margin-top: 10px;
   padding: 30px 40px;
-
   direction: rtl;
   text-align: right;
 }
@@ -76,6 +75,7 @@
   margin: 60px auto;
   max-width: 1200px;
   padding: 0 20px;
+  
 }
 
 .form-row {
@@ -125,7 +125,7 @@
   resize: vertical;
 }
 
- button {
+ .form-group-btn{
  align-self: flex-start;
   background: #ffffff;
   color: #35818b;
@@ -140,7 +140,7 @@
 
 }
 
-button:hover {
+.form-group-btn:hover {
   background: #e9eff0;
 
 }

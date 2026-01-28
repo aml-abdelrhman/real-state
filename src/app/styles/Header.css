@@ -39,7 +39,7 @@ body {
   position: absolute;
   bottom: 20px;
   color: #ffffff;
-  font-size: 70px;
+  font-size: 60px!important;
   font-weight: 800;
   letter-spacing: 0.5px;
   z-index: 3;
